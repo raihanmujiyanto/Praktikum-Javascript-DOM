@@ -1,123 +1,145 @@
+//
 console.log("Bismillah Kita Belajar Javascript DOM");
+//Aktivitas 1 DOM SELECTION
+//penjelasan kita hars meneleksi ata "menangkap"
+//mengambil elemen html berdasrakan ID/CSS
 
-// Aktivitas 1 DOM SELECTION 
-// Penjelasan kita harus menyeleksi atau "menangkap"
-// Mengambil Elemen HTML berdasarkan ID/Class
-
-
-// 1. Mengambil Elemen Judul 
-// getElemenyByid -> seleksi berdasasarkan id
+//1. Mengambil Elemen judul & Sub jdul
+//getElementById -> seleksi berdasarkan id
 const judulUtama = document.getElementById("judul-utama");
 
-// 1.1 Mengambil Elemen Sub Judul
-// querySelector(#...)
+//1.1 Mengambil Elemen sub judul
+//querySelector(#...)
 const subJudul = document.querySelector("#sub-judul");
 
-// 2. Mengambil elemen pada kartu 1 (Kartu Manipulasi Teks & Style)
+//2. mengambil elemen pada kartu 1 (kart manipulasi teks & style)
 const teksPreview = document.getElementById("teks-preview");
 const boxPreview = document.getElementById("box-preview");
-const cardManipulasi = document.getElementById("card-manipulasi")
+const cardManipulasi = document.getElementById("card-manipulasi");
 
-// 3. Mengambil Elemen Tombol-Tombol Aksi pada Kartu 1
+//3. Mengambil elemen tobol-tombol aksi pada kartu 1
 const btnUbahTeks = document.getElementById("btn-ubah-teks");
 const btnToggleWarna = document.getElementById("btn-toggle-warna");
 const btnReset = document.getElementById("btn-reset");
 
-// 4. Mengambil Elemen pada kartu 2 (fitur catatan dinamis / todolist sederhana)
+//4. Mengambil elmen pada kartu 2 (fitur cattan dinamis/to dolist sederhana)
 const inputCatatan = document.getElementById("input-catatan");
 const btnTambah = document.getElementById("btn-tambah");
 const daftarCatatan = document.getElementById("daftar-catatan");
 const jumlahCatatan = document.getElementById("jumlah-catatan");
 const pesanKosong = document.getElementById("pesan-kosong");
 
+//Aktivitas 2 manipulasi teks & style
+//addEventListener("click", function()..)
+btnUbahTeks.addEventListener("click", function () {
+  //.innertext = memnganti atau mengisi tulisan teks ang asa di html
+  teksPreview.innerText = "Hebat! Teks ini berhasil diubah melalui DOM!";
 
-
-// Aktivitas 2 Manipulasi Teks & Style
-// addEventListener("click", function(){...})
-btnUbahTeks.addEventListener("click", function(){
-    // .innerText = Mengganti atau Mengisi tulisan teks yang ada di HTML
-    teksPreview.innerText = "Hebat! Teks ini berhasil diubah melalui DOM!";
-
-    // .style.color = Mengubah warna teks secara langsung melalui Javascript
-    teksPreview.style.color = "#1f1d97"; 
-
-    // console.log mencetak pesan di console
-    console.log("DOM Teks Preview telah diperbaharui");
+  //.style.color = memngubah warna teks secara langsng melalui js
+  teksPreview.style.color = "#1f1d97";
+  // console.log mencetak pesan di console
+  console.log("DOM Teks Preview telah diperbaharui");
 });
 
+//B -- Manipulasi class css menggnakan classListToggle()
+btnToggleWarna.addEventListener("click", function () {
+  //.classListener.toggle = fitur untutuk saklar otomatis
+  boxPreview.classList.toggle("active-mode");
+  cardManipulasi.classList.toggle("highlight");
 
-// B -- Manipulasi Class Css Menggunakan ClassListToggle()
-btnToggleWarna.addEventListener("click", function(){
-    // .classList.toggle = Fitur unutk saklar otomatis
-    boxPreview.classList.toggle("active-mode");
-    cardManipulasi.classList.toggle("highlight");
-
-    console.log("DOM Class Higlight berhasil di switch");
+  console.log("DOM Class Highlight berhasil di switch");
 });
 
-// C-- Mengembalikan (Reset) Teks & style ke kondisi semula
-btnReset.addEventListener("click" , function(){
-    // 1. Kembalikan tulisan teks ke aslinya 
-    teksPreview.innerText("Halo! Teks ini siap diubah oleh Javascript")
-    // 2. Kosongkan warna inline style (style.color) agar balik ke css bawaan 
-    teksPreview.style.color= "";
-    // 3. Hapus Class khusus menggunakan >classList.remove("...")
-    boxPreview.classList.remove("active-mode")
-    cardManipulasi.classList.remove("highlight")
+//C Mengembalikan (Reset) teks & style ke kondisi semula
+btnReset.addEventListener("click", function () {
+  //1. kembalikan tulisan tteks ke aslinya
+  teksPreview.innerText = "Halo! Teks ini siap diubah oleh JavaScript.";
 
-    console.log("DOM Tampilan DIRESET ")
+  //2. Kosongkan warna inline style (style.color = "") agar balik ke css bawaan
+  teksPreview.style.color = "";
 
-})
+  //3. Hapus class khusus mengnakan .classList.remove(".....")
+  boxPreview.classList.remove("active-mode");
+  cardManipulasi.classList.remove("highlight");
 
-// Aktivitas 3 & 4: Element Dinamis & event Handling (TO-DO LIST)
-// Penjelasan 
-// bagian ini kita bakal belajar buat eemet html lu secara otomatis 
-// mengisi teks nya, memberi tombol hapus, lalu menemepelkan ke dala layar <ul>
+  console.log("DOM Tampilan direset");
+});
 
-// langkah 1 : Variabel peneampung angka jumlah catatan 
-// 'let' digunakan karena nilai variabel yang aka berubah ubah.
-let totalCatatan=0;
+//Aktivitas 3&4;  Elemen dinamis & Event Handling (TO-DO LIST)
+//Penjelasan
+//BAgian ini kita bakal belajar buat elemen HTML LI secara ootomatis
+//mengisi teks ya, memberi tombol hapus lalu menempelkan kedalam laya <ul>
+let totalCatatan = 0;
 
-// langkah 2 : membuat function supaya update angka counter & pesan status 
-// fungsi ini kumpulan perintah yang diberi nama. kita bisa panggil kapan saja. 
+//LAngkah 2: membuatu function supaya update angka countter & pesan status
+//fungsi ini kumpulan perinta yang diberi nama. kita bisa panggil kapan saja
 function perbaruiJumlah() {
-    // masukan angka total catatan terbaru ke dalam tag <span id = "jumlah-catatan">
-    jumlahCatatan.innerText = totalCatatan
+  //masukan angka total catatan terbaru ke dalam tah<span id ="jumlah-catatamn">
+  jumlahCatatan.innerText = totalCatatan;
 
-    // periksa kondisi : apakah catatan = 0 ?
-    if (totalCatatan ===0 ) {
-        // jika 0 : hapus class "hidden" supaya teks "belum ada catatan" muncul ke layar 
-        pesanKosong.classList.remove("hidden")
-    }
-    else {
-        // jika >0 : tambahkan class hidden agar teks "belum ada catatan" SEMBUNYI/hilang 
-        pesanKosong.classList.add("hidden")
-    }
+  //periksa kondisi; apakah catatan 0?
+  if (totalCatatan === 0) {
+    //jika 0: hapus class "hidden" supaya teks "Belum ada catatan" muncul di layar
+    pesanKosong.classList.remove("hidden");
+  } 
+  else {
+    //jika > 0 : tammbahkan class"hidden" agar teks "belum ada catatan" SEMBUNYI/hilang
+    pesanKosong.classList.add("hidden");
+  }
 }
 
-// langkah 3 : funtion tambah catatan fungsi utama logika
+//LAngkah 3: function tambah catatan fungsi utama logika
 function tambahCatatan() {
-    // 3.1 input catatan value = mengambil teks yang diketik oleh user di kolom input 
-    // .trim () = untuk menghapus spasi diawal dan spasi di akhir
-    const isiTeks = inputCatatan.value.trim()
-    
-    // 3.2 valisdasi input: Jika isiTeks kosong tampilkan peringatan berupa alert 
-    if(isiTeks == ""){
-        alert("catatan tidak boleh kosong!")
-        return;
-    }
+  //3.1 input catatan value = mengambil teks yang diketik oleh user dikolom input
+  //.trim() = untuk menghapus spasi diawal dan spasi di akhir
+  const isiTeks = inputCatatan.value.trim();
 
-    // 3.3 document .Create.Element("li") = membuat tag html <li> baru secara dinamis pake Javascripst 
-    const liBaru = document.createDocument("li");
-    liBaru.innerHTML= "note-item"; 
+  //3.2 Validasi input; jika isi Teks kosong tampilkan peringatan berua alert
+  if (isiTeks === "") {
+    alert("Catatan tidak boleh kosong!");
+    return;
+  }
+  //3.3 document .create.Element("li") = membuat tag html <li> bar secara dinamis pake Javascript
+  const liBaru = document.createElement("li");
+  liBaru.className = "note-item";
 
-    // 3.4 .innerHTML = mengisi Struktur didalam <li> dengan teks catatan & tombol "hapus"
-    // tanda backtick (`)
-    liBaru.innerHTML= `<span>${isiTeks}</span> <button class= "btn-hapus"> Hapus</button>`;
+  //3.4 .innerHTML = mengisi strktur di dalam <li> dengan teks catatan & tombil "hapus"
+  //tanda backtick (`)
+  liBaru.innerHTML = `<span>${isiTeks}</span> <button class="btn-hapus">Hapus</button>`;
+
+  //3.5 Menambahkan Event listener khusus tombol "Hapus" pada item <li>
+  //liBaru.querySelector(."btn-hapus") menngambil berdasarkan class 'btn-hapus'
+  const btnHapus = liBaru.querySelector(".btn-hapus");
+  btnHapus.addEventListener("click", function () {
+    liBaru.remove();
+    totalCatatan--;
+    perbaruiJumlah();
+    console.log(`[DOM] Catatan "${isiTeks}" dihapus`);
+  });
+
+  //3.6 .appendChild (liBaru) = menempelkan elemen <li> didalam wadah  <ul id="daftar-catatan">
+  daftarCatatan.appendChild(liBaru);
+
+  //3.7 mengosongkan kembali isi kolom inpu  agar siap diketik lagi
+  inputCatatan.value = "";
+
+  //3.8 TotalCatatan++ increment total catatan ditambah 1x
+  totalCatatan++;
+  perbaruiJumlah();
+  console.log(`DOM Catatan Baru ditambahkan : ${isiTeks}`);
 }
 
-// langkah 4 : event listener klik tombol + tambah ( menggunakan mouse)
-// ketika klik tombol = tambah jalankan fungsi TambahkanCatatan()
-btnTambah.addEventListener("click", function(){
-    tambahCatatan(); 
-})
+//Langkah 4: Event Listener Klik tombol + tambah
+//ketika klik tombol + tambah jalankan funngsi TambahCatatan()
+btnTambah.addEventListener("click", function () {
+  tambahCatatan();
+});
+
+//Lannngkah 5 Event Listener tombol "ENTER" (memnggnakan keyboard)
+//ketika user mengetik dikolom inpt dan melepeas tombol -> (event : keyup)
+inputCatatan.addEventListener("keyup", function (Event) {
+  //perikasa apakah tombol keyboard yang ditekan adalah tombol enter?
+  if (event.key === "Enter") {
+    tambahCatatan();
+  }
+});
